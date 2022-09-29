@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
 import './EightBall.css';
 function randAns(answers) {
     const idx = Math.floor(Math.random() * answers.length);
@@ -14,14 +14,24 @@ const EightBall = (props) => {
         const { msg, color } = randAns(props.answers);
         setColor(color);
         setMessage(msg);
+    }
 
+    function resetEightBall() {
+        setColor('black');
+        setMessage('Think of a question');
     }
     return (
-        <div className={`EightBall`}
-            style={{ backgroundColor: color }}
-            onClick={handleClick}>
-            <span>{msg}</span>
-        </div>
+        <Fragment>
+            <div className={`EightBall`}
+                style={{ backgroundColor: color }}
+                onClick={handleClick}>
+                <b>{msg}</b>
+            </div>
+            <div className="EightBall-reset">
+                <button onClick={resetEightBall}>Reset</button>
+            </div>
+        </Fragment>
+        
     )
 }
 
